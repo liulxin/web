@@ -199,3 +199,7 @@ console.log(Object.prototype.toString.call(BigInt(2)))
 console.log(Object.prototype.toString.call(BigInt(2)).slice(8,-1)) 
 // BigInt
 ```
+
+参考资料：  
+[BigInt](https://java.ctolib.com/tc39-proposal-bigint.html)  
+[MDN数据类型和数据结构](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures)
