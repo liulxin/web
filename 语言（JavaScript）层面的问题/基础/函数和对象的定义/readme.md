@@ -14,7 +14,7 @@ function add() {}
 let add = function() {}
 ```
 
-3. Function 构造函数
+3. Function 构造函数  
    Function 构造函数可以接收任意数量的参数，最后一个参数始终都被看成是函数体，前边的参数则是新函数的参数。
 
 ```
