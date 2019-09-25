@@ -32,13 +32,24 @@
 // console.log(o2.a)
 // console.log(a)
 
+// var a = 1
+// function test() {
+//   var a = 2
+//   function test2() {
+//     return a
+//   }
+//   return test2()
+// }
 
-var scope = "global scope";
-function checkscope(){
-    var scope = "local scope";
-    function f(){
-        return scope;
-    }
-    return f();
+// test()
+
+var a = 1
+function test() {
+  var a = 2
+  function test2() {
+    return a
+  }
+  return test2
 }
-checkscope();
+
+test()()

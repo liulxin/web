@@ -8,7 +8,9 @@
 - 函数代码（环境）：当函数被调用执行时，会进入当前函数中执行代码
 - eval
 
-每次当 JavaScript 引擎遇到可执行代码的时候，就会进入一个执行上下文。一个 JavaScript 程序中，会产生多个执行上下文。那么 js 引擎如何处理呢？执行上下文在逻辑上组成一个上下文栈（Execution context stack，ECS）。栈底部永远都是全局上下文(global context)，而顶部就是当前的执行上下文。
+每次当 JavaScript 引擎遇到可执行代码的时候，就会进入一个执行上下文。一个 JavaScript 程序中，会产生多个执行上下文。那么 js 引擎如何处理呢？
+
+执行上下文在逻辑上组成一个`上下文栈`（Execution context stack，ECS），也就是`调用栈`,具有`LIFO`（后进先出）结构。栈底部永远都是全局上下文(global context)，而顶部就是当前的执行上下文。
 
 当代码在执行过程中，遇到以上三类情况，都会生成一个执行上下文，放入栈中，而处于栈顶的上下文执行完毕之后，就会自动出栈。值得注意的一点是：每次函数的调用都会创建一个执行上下文压入栈中，无论是函数内部的函数、还是递归调用等。
 
@@ -65,41 +67,45 @@ fun3 执行完毕：
 ## 思考
 
 ```
-var scope = "global scope";
-function checkscope(){
-    var scope = "local scope";
-    function f(){
-        return scope;
-    }
-    return f();
+var a = 1
+function test() {
+  var a = 2
+  function test2() {
+    return a
+  }
+  return test2()
 }
-checkscope();// local scope
 
-var scope = "global scope";
-function checkscope(){
-    var scope = "local scope";
-    function f(){
-        return scope;
-    }
-    return f;
-}
-checkscope()();// local scope
+test()
 ```
 
-两段代码执行的结果一样，但是两段代码究竟有哪些不同呢？就是执行上下文栈不同
+```
+var a = 1
+function test() {
+  var a = 2
+  function test2() {
+    return a
+  }
+  return test2
+}
+
+test()()
+```
+
+两段代码执行的结果一样，但是执行的过程有什么不同呢？就是执行上下文栈不同
 
 ```
 示例1:
 
-ECStack.push(<checkscope> functionContext);
-ECStack.push(<f> functionContext);
+ECStack.push(<test> functionContext);
+ECStack.push(<test2> functionContext);
 ECStack.pop();
 ECStack.pop();
 
 示例2:
 
-ECStack.push(<checkscope> functionContext);
+ECStack.push(<test> functionContext);
 ECStack.pop();
-ECStack.push(<f> functionContext);
+ECStack.push(<test2> functionContext);
 ECStack.pop();
 ```
