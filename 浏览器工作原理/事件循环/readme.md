@@ -93,3 +93,12 @@ console.log('script end')
 * await之后如果不是promise，await会阻塞后面的代码，会先执行async外面的同步代码，等外面的同步代码执行完成在执行async中的代码
 * 如果await等到的是一个 promise 对象，await 也会暂停async后面的代码，先执行async外面的同步代码，等着 Promise 对象 fulfilled，然后把 resolve 的参数作为 await 表达式的运算结果
 >只有运行完await语句，才把await语句后面的全部代码加入到微任务行列
+
+代码分析：
+* 执行同步代码，输出`script start`, setTimeout 加入宏任务
+* 执行 async1 ，输出 `async1 start`, 继续下后执行到 await async2()，执行 async2 函数
+* async2 函数内并没有 await，按顺序执行，同步输出 `async2`，按照 async 函数规则，async2 函数仍然返回一个 promise，作为 async1 函数中的 await 表达式的值, 放入微任务
+* 主线程回到 async1 函数外，继续执行，输出 Promise 构造函数内 `promise1`，同时将这个 promise 的执行完成逻辑放到微任务当中
+* 执行完最后一行代码，输出 `script end`
+* 开始检查微任务，输出 `async1 end`，`promise2`
+* 宏任务执行，输出`setTimeout`
