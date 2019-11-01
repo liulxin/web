@@ -28,6 +28,7 @@
 * 盒模型相关属性：`width height padding margin display border-width border min-height`
 * 定位属性及浮动：`top left bottom right position float clear`
 * 内部文件结构的改变等：`text-align overflow-y font-weight overflow font-family line-height vertival-align white-space font-size`
+
 触发重绘的属性:
 * `color border-style border-radius visibility text-decoration background outline box-shadow`等
 

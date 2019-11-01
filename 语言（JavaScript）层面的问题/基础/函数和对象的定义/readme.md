@@ -25,7 +25,7 @@ let add = new Function( 'a', 'b', 'return a + b')
 
 ## 对象的定义
 
-创建 Object 实例有两种方式：
+创建 Object 实例有三种方式：
 
 1. new 操作符跟 Object 构造函数
 
